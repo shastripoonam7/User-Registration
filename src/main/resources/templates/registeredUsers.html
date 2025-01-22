@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Registered Users!</title>
+</head>
+<body>
+	<table>
+		<tr th:if="${users.empty}">
+			<td>No users registered</td>
+		</tr>
+		<tr th:each="user : ${users}">
+			<td><span th:text="${user.email}">email</span></td>
+		</tr>
+	</table>
+</body>
+</html>

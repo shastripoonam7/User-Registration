@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<center>
+		<span align="right"><form action="/users"><button>login</button></form></span>
+		<form method="post" action="/registerUser">
+			<table>
+				<tr>
+					<td>Enter email:</td>
+					<td><input type="text" name="email"/></td>
+				</tr>
+				<tr>
+					<td>Enter password:</td>
+					<td><input type="password" name="password"/></td>
+				</tr>
+				<tr>
+					<td>Enter role Id:</td>
+					<td><input type="text" name="roles"/></td>
+				</tr>
+				<tr>
+					<td><input type="submit"/></td>
+				</tr>
+			</table>
+			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+		</form>
+	
+	</center>
+</body>
+</html>
