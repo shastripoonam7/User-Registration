@@ -36,11 +36,13 @@ public class ViewBasedRegistrationController {
 	}
 	
 	@PostMapping("/registerUser")
-	public String registerUser(@ModelAttribute("user") User user) {
+	public String registerUser(@ModelAttribute("user") User user,Model model) {
 		System.out.println("Trying to save");
 		userService.save(user);
-		return "registerUser";
-		//return "User details saved successfully!";
+		String message ="User Record saved successfully!";
+		model.addAttribute("message",message);
+		return "register";
+		
 		
 	}
 	

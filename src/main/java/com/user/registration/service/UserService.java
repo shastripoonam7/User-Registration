@@ -1,6 +1,5 @@
 package com.user.registration.service;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,9 +10,9 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.user.registration.model.Role;
 import com.user.registration.model.User;
 import com.user.registration.repo.UserRepository;
 
@@ -23,7 +22,12 @@ public class UserService implements UserDetailsService {
 	@Autowired
 	UserRepository userRepo;
 	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
+	
 	public User save(User user) {
+		String password = passwordEncoder.encode(user.getPassword());
+		user.setPassword(password);
 		return userRepo.save(user);
 	}
 
@@ -39,9 +43,10 @@ public class UserService implements UserDetailsService {
 		List<String> roleDescription = user.getRoles().stream().map(role->role.getName()).collect(Collectors.toList());
 		System.out.println("RoleDescription:"+roleDescription);
 		System.out.println("I am in loadUserByUsername"+user.getRoles());
+		
 		if (user != null) {
             return new org.springframework.security.core.userdetails.User(user.getEmail(),
-                    "{noop}"+user.getPassword(),
+                    user.getPassword(),
                     mapRolesToAuthorities(roleDescription));
         }else{
             throw new UsernameNotFoundException("Invalid username or password.");

@@ -12,5 +12,11 @@
 	<center>	<button>Click me to Register!</button></center>
 	 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 	</form>
+	<br></br>
+	<form method="get" action="users">
+	<center>	<button>Login to view users!</button></center>
+	 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+	</form>
+	<center><font sty]e="color:ref;">Note: only admin users will be able to view User.</font></center>
 </body>
 </html>
