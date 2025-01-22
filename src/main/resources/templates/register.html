@@ -19,7 +19,14 @@
 				</tr>
 				<tr>
 					<td>Enter role Id:</td>
-					<td><input type="text" name="roles"/></td>
+					<td><select name="roles">
+							<span th:each="role: ${roles}">
+								<option th:value="${role.id}">
+									<span th:text="${role.name}">name</span>
+								</option>
+							</span>
+						</select>
+					</td>
 				</tr>
 				<tr>
 					<td colspan="2"><input type="submit"/></td>

@@ -20,4 +20,8 @@ public class RoleService {
 	public List<Role> findAll(){
 		return roleRepo.findAll();
 	}
+	
+	public List<String> findAllByNames(){
+		return this.findAll().stream().map(n->n.getName()).toList();
+	}
 }
